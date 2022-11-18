@@ -10,6 +10,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
     <title>Five Guys</title>
 </head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #A4BE7B;
+        height: 50px;
+    }
+    ul{
+        display: flex;
+        column-gap: 20px;
+        list-style: none;
+        align-items: center;
+        padding: 0;
+    }
+    button {
+        border-radius: 20px;
+        background-color: turquoise;
+        margin-right: 50px;
+
+
+    }
+    button > a {
+        color: white;
+        text-decoration: none;
+        
+    }
+
+</style>
 <body ng-app="mainApp">
     <header>
         <ul>
@@ -18,18 +51,17 @@
             <li><a href="#!game">Games</a></li>
             <li><a href="#!movie">Movies</a></li>
         </ul>
-        <a href="#!shop-card">Shop Cart</a>
-        <a href="#!digital-wallet">Digital Waller</a>
-        <a href="#!login">Login</a>
+        <button><a href="#!login">Login</a></button>
     </header>
     <main ng-view>
 
     </main>
     <footer>
-        <span>&copy; Final Project - Five Guys - Taka, Matheus, Masashi, Lucas</span>
+        <span>&copy; Final Project - PeekaBook - Taka, Matheus, Masashi, Lucas</span>
     </footer>
 </body>
 <script type="module" src="./script/main.js">
 
 </script>
+
 </html>
