@@ -10,58 +10,64 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
     <title>Five Guys</title>
 </head>
-<style>
-    *{
-        padding: 0;
-        margin: 0;
-    }
-    header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #A4BE7B;
-        height: 50px;
-    }
-    ul{
-        display: flex;
-        column-gap: 20px;
-        list-style: none;
-        align-items: center;
-        padding: 0;
-    }
-    button {
-        border-radius: 20px;
-        background-color: turquoise;
-        margin-right: 50px;
-
-
-    }
-    button > a {
-        color: white;
-        text-decoration: none;
-        
-    }
-
-</style>
 <body ng-app="mainApp">
     <header>
-        <ul>
-            <li><a href="#/!">Home</a></li>
-            <li><a href="#!book">Books</a></li>
-            <li><a href="#!game">Games</a></li>
-            <li><a href="#!movie">Movies</a></li>
-        </ul>
-        <button><a href="#!login">Login</a></button>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #3C096C;">
+          <div class="container">
+            <a class="navbar-brand" href="#/!">PeekaBook</a>
+            <button class="navbar-toggler hidden-lg-up" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+              <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                  <a active-class="active" class="nav-link" href="#/!">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a active-class="active" class="nav-link" href="#!book">Books</a>
+                </li>
+                <li class="nav-item">
+                  <a active-class="active" class="nav-link" href="#!game">Games</a>
+                </li>
+                <li class="nav-item">
+                  <a active-class="active" class="nav-link" href="#!movie">Movies</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign In</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="#!login">Login</a>
+                    <a class="dropdown-item" href="#!shop-card">Shop Cart</a>
+                    <a class="dropdown-item" href="#!digital-wallet">Digital Wallet</a>
+                  </div>
+                </li>
+              </ul>
+              <form class="d-flex my-2 my-lg-0">
+                <input class="form-control me-sm-2" type="text" placeholder="Search product">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </nav>
     </header>
     <main ng-view>
 
     </main>
     <footer>
-        <span>&copy; Final Project - PeekaBook - Taka, Matheus, Masashi, Lucas</span>
+        <span>&copy; Final Project - Five Guys - Taka, Matheus, Masashi, Lucas</span>
     </footer>
 </body>
 <script type="module" src="./script/main.js">
 
 </script>
 
+
+<style>
+body { 
+    padding-top: 65px; 
+    background-color: #9D4EDD;
+
+}
+h1 {
+    color: #10002B;
+}
+</style>
 </html>

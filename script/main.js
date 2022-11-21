@@ -36,25 +36,12 @@ mainApp.config(($routeProvider)=>{
         templateUrl:'./template/notfound.html'
     })
 });
-mainApp.run(function($rootScope,$location, $http    ){
+mainApp.run(function($rootScope,$location,$http){
     $rootScope.userMap = new Map();
     $rootScope.productMap = new Map();
+    
 
-    try{
-        $http.get('../data/products.json').then(
-            (response)=>{
-                if(response.status==200){
-                    response.data.forEach((value)=>{
-                        let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
-                        $rootScope.productMap.set(value.id,newProduct);
-                    })
-                }
-            },
-            (reject)=>{console.log(reject)}
-        )
-    }catch(e){
-        console.log(e);
-    };
+   
     try{
         $http.get('../data/users.json').then(
             (response)=>{
@@ -74,12 +61,122 @@ mainApp.run(function($rootScope,$location, $http    ){
 mainApp.controller('homeControl', function($scope){
 
 });
-mainApp.controller('bookControl', function($scope){
+mainApp.controller('bookControl', function($scope,$rootScope,$http){
+    
+});
+
+mainApp.controller('gameControl',function($scope,$rootScope,$http){
+    try{
+        $http.get('../data/products.json').then(
+            (response)=>{
+                if(response.status==200){
+                    console.log(response.data);
+                    $scope.productsData = response.data;
+                    response.data.map((value)=>{
+                        let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
+                        $rootScope.productMap.set(value.id,newProduct);
+                        // console.log(value.category);
+                    })
+                }
+            },
+            (reject)=>{console.log(reject)}
+        )
+    }catch(e){
+        console.log(e);
+    };
+
+    // $scope.column = 'item_name';
+    $scope.reverse = true;
+    $scope.sort = function(col){
+        $scope.column = col;
+        switch($scope.reverse){
+            case false:
+                $scope.reverse = true;
+                $scope.reverseclass = 'arrow-down';
+                break;
+                case true:
+                    $scope.reverse = false;
+                    $scope.reverseclass = 'arrow-up';
+            break;
+        }
+        // if($scope.reverse == true){
+        // $scope.reverse = false;
+        // $scope.reverseclass = 'arrow-up';
+        // }else{
+        //     $scope.reverse = true;
+        //     $scope.reverseclass = 'arrow-down';
+        // }
+    };
+
+    $scope.sortClass = function(col){
+        if($scope.column == col ){
+         if($scope.reverse){
+             return 'arrow-down';
+        }else{
+            return 'arrow-up'; 
+         }
+        }else{
+         return '';
+        }
+    };
+
+    $scope.resset = function(col){
+        $scope.column = "id";
+        $scope.reverse = true;
+    }
 
 });
-mainApp.controller('gameControl', function($scope){
+mainApp.controller('movieControl', function($scope,$rootScope,$http){
+    try{
+        $http.get('../data/products.json').then(
+            (response)=>{
+                if(response.status==200){
+                    console.log(response.data);
+                    $scope.productsData = response.data;
+                    response.data.map((value)=>{
+                        let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
+                        $rootScope.productMap.set(value.id,newProduct);
+                        // console.log(value.category);
+                    })
+                }
+            },
+            (reject)=>{console.log(reject)}
+        )
+    }catch(e){
+        console.log(e);
+    };
 
-});
-mainApp.controller('movieControl', function($scope){
+    // $scope.column = 'item_name';
+    $scope.reverse = true;
+    $scope.sort = function(col){
+        $scope.column = col;
+        switch($scope.reverse){
+            case false:
+                $scope.reverse = true;
+                $scope.reverseclass = 'arrow-down';
+            break;
+            case true:
+                $scope.reverse = false;
+                $scope.reverseclass = 'arrow-up';
+            break;
+        }
+    };
+
+    $scope.sortClass = function(col){
+        if($scope.column == col ){
+         if($scope.reverse){
+             return 'arrow-up';
+        }else{
+            return 'arrow-down'; 
+         }
+        }else{
+         return '';
+        }
+    };
+
+    $scope.resset = function(col){
+        $scope.column = "id";
+        $scope.reverse = true;
+    }
 
 });
