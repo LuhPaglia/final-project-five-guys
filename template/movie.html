@@ -1,14 +1,14 @@
 <section>
     <article>
         <input ng-model="filterInput.item_name" placeholder="search"/>
-        <button ng-click="sort('item_name')" ng-class='sortClass("item_name")'>Sort of Name</button>
-        <button ng-click="sort('price')" ng-class='sortClass("price")'>Sort of Price</button>
-        <button ng-click="sort('release')" ng-class='sortClass("release")'>Sort of Release Date</button>
-        <button ng-click="resset()">Resset</button>
+        <button class="sortButton" ng-click="sort('item_name')">{{sortName}}</button>
+        <button class="sortButton" ng-click="sort('price')">{{sortPrice}}</button>
+        <button class="sortButton" ng-click="sort('release')">{{sortDate}}</button>
+        <button class="sortButton" ng-click="resset('item_name')">Resset</button>
     </article>
     <article>
-        <div class="games">
-            <div ng-repeat="movie in productsData | filter : {category:'movie'} | filter : filterInput | orderBy : column : reverse" class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="movies">
+            <div ng-repeat="movie in productsData | filter : {category:'movie'} | filter : filterInput | orderBy : key : reverse" class="row row-cols-1 row-cols-md-4 g-4">
                 <class="col">
                   <div class="card h-100">
                     <img src="../img/movies/{{movie.img_prod}}" class="card-img-top" alt="{{movie.item_name}}">
@@ -25,7 +25,10 @@
     </article>
 </section>
 <style>
-    .games{
+    .sortButton{
+        width: 100px;
+    }
+    .movies{
         padding-top: 50px;
         display: flex;
         flex-wrap: wrap;

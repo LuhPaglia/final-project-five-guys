@@ -39,9 +39,6 @@ mainApp.config(($routeProvider)=>{
 mainApp.run(function($rootScope,$location,$http){
     $rootScope.userMap = new Map();
     $rootScope.productMap = new Map();
-    
-
-   
     try{
         $http.get('../data/users.json').then(
             (response)=>{
@@ -75,7 +72,6 @@ mainApp.controller('gameControl',function($scope,$rootScope,$http){
                     response.data.map((value)=>{
                         let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
                         $rootScope.productMap.set(value.id,newProduct);
-                        // console.log(value.category);
                     })
                 }
             },
@@ -85,47 +81,91 @@ mainApp.controller('gameControl',function($scope,$rootScope,$http){
         console.log(e);
     };
 
-    // $scope.column = 'item_name';
-    $scope.reverse = true;
+    $scope.key = 'item_name';
+    let button = document.getElementsByClassName("sortButton");
+    if($scope.key == 'item_name'){
+        $scope.sortName = "a";
+        button[0].style.backgroundColor = "	#99CCFF";
+        $scope.sortPrice = "Price";
+        $scope.sortDate = "Date";
+    };
+    $scope.reverse = false;
     $scope.sort = function(col){
-        $scope.column = col;
-        switch($scope.reverse){
-            case false:
-                $scope.reverse = true;
-                $scope.reverseclass = 'arrow-down';
+        $scope.key = col;
+        if($scope.reverse == true){
+            $scope.reverse = false;
+            switch($scope.key){
+                case 'item_name':
+                    $scope.sortName = "a";
+                    $scope.sortPrice = "Price";
+                    $scope.sortDate = "Date";
+                    button[0].style.backgroundColor = "#99CCFF";
+                    button[1].style.backgroundColor = "#FFFFFF";
+                    button[2].style.backgroundColor = "#FFFFFF";
                 break;
-                case true:
-                    $scope.reverse = false;
-                    $scope.reverseclass = 'arrow-up';
-            break;
-        }
-        // if($scope.reverse == true){
-        // $scope.reverse = false;
-        // $scope.reverseclass = 'arrow-up';
-        // }else{
-        //     $scope.reverse = true;
-        //     $scope.reverseclass = 'arrow-down';
-        // }
+                case 'price':
+                    $scope.sortPrice = "row";
+                    $scope.sortName = "Name";
+                    $scope.sortDate = "Date";
+                    button[0].style.backgroundColor = "#FFFFFF";
+                    button[1].style.backgroundColor = "#99CCFF";
+                    button[2].style.backgroundColor = "	#FFFFFF";
+                break;
+                case 'release':
+                    $scope.sortDate = "earliest";
+                    $scope.sortName = "Name";
+                    $scope.sortPrice = "Price";
+                    button[0].style.backgroundColor = "#FFFFFF";
+                    button[1].style.backgroundColor = "#FFFFFF";
+                    button[2].style.backgroundColor = "	#99CCFF";
+                break;
+            }
+        }else{
+            $scope.reverse = true;
+            switch($scope.key){
+                case 'item_name':
+                    $scope.sortName = "z";
+                    $scope.sortPrice = "Price";
+                    $scope.sortDate = "Date";
+                    button[0].style.backgroundColor = "#99CCFF";
+                    button[1].style.backgroundColor = "#FFFFFF";
+                    button[2].style.backgroundColor = "#FFFFFF";
+                break;
+                case 'price':
+                    $scope.sortPrice = "high";
+                    $scope.sortName = "Name";
+                    $scope.sortDate = "Date";
+                    button[0].style.backgroundColor = "#FFFFFF";
+                    button[1].style.backgroundColor = "#99CCFF";
+                    button[2].style.backgroundColor = "	#FFFFFF";
+                break;
+                case 'release':
+                    $scope.sortDate = "latest";
+                    $scope.sortName = "Name";
+                    $scope.sortPrice = "Price";
+                    button[0].style.backgroundColor = "#FFFFFF";
+                    button[1].style.backgroundColor = "#FFFFFF";
+                    button[2].style.backgroundColor = "	#99CCFF";
+                break;
+            }
+        } 
     };
 
-    $scope.sortClass = function(col){
-        if($scope.column == col ){
-         if($scope.reverse){
-             return 'arrow-down';
-        }else{
-            return 'arrow-up'; 
-         }
-        }else{
-         return '';
-        }
-    };
-
-    $scope.resset = function(col){
-        $scope.column = "id";
-        $scope.reverse = true;
+    $scope.resset = function(item_name){
+        $scope.key = item_name;
+        $scope.reverse = false;
+        if($scope.key == 'item_name'){
+            $scope.sortName = "a";
+            $scope.sortPrice = "Price";
+            $scope.sortDate = "Date";
+            button[0].style.backgroundColor = "#99CCFF";
+            button[1].style.backgroundColor = "#FFFFFF";
+            button[2].style.backgroundColor = "#FFFFFF";
+        };
     }
 
 });
+
 mainApp.controller('movieControl', function($scope,$rootScope,$http){
     try{
         $http.get('../data/products.json').then(
@@ -136,7 +176,6 @@ mainApp.controller('movieControl', function($scope,$rootScope,$http){
                     response.data.map((value)=>{
                         let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
                         $rootScope.productMap.set(value.id,newProduct);
-                        // console.log(value.category);
                     })
                 }
             },
@@ -146,37 +185,88 @@ mainApp.controller('movieControl', function($scope,$rootScope,$http){
         console.log(e);
     };
 
-    // $scope.column = 'item_name';
-    $scope.reverse = true;
+    $scope.key = 'item_name';
+    let button = document.getElementsByClassName("sortButton");
+    if($scope.key == 'item_name'){
+        $scope.sortName = "a";
+        button[0].style.backgroundColor = "	#99CCFF";
+        $scope.sortPrice = "Price";
+        $scope.sortDate = "Date";
+    };
+    $scope.reverse = false;
     $scope.sort = function(col){
-        $scope.column = col;
-        switch($scope.reverse){
-            case false:
-                $scope.reverse = true;
-                $scope.reverseclass = 'arrow-down';
-            break;
-            case true:
-                $scope.reverse = false;
-                $scope.reverseclass = 'arrow-up';
-            break;
-        }
+        $scope.key = col;
+        if($scope.reverse == true){
+            $scope.reverse = false;
+            switch($scope.key){
+                case 'item_name':
+                    $scope.sortName = "a";
+                    $scope.sortPrice = "Price";
+                    $scope.sortDate = "Date";
+                    button[0].style.backgroundColor = "#99CCFF";
+                    button[1].style.backgroundColor = "#FFFFFF";
+                    button[2].style.backgroundColor = "#FFFFFF";
+                break;
+                case 'price':
+                    $scope.sortPrice = "row";
+                    $scope.sortName = "Name";
+                    $scope.sortDate = "Date";
+                    button[0].style.backgroundColor = "#FFFFFF";
+                    button[1].style.backgroundColor = "#99CCFF";
+                    button[2].style.backgroundColor = "	#FFFFFF";
+                break;
+                case 'release':
+                    $scope.sortDate = "earliest";
+                    $scope.sortName = "Name";
+                    $scope.sortPrice = "Price";
+                    button[0].style.backgroundColor = "#FFFFFF";
+                    button[1].style.backgroundColor = "#FFFFFF";
+                    button[2].style.backgroundColor = "	#99CCFF";
+                break;
+            }
+        }else{
+            $scope.reverse = true;
+            switch($scope.key){
+                case 'item_name':
+                    $scope.sortName = "z";
+                    $scope.sortPrice = "Price";
+                    $scope.sortDate = "Date";
+                    button[0].style.backgroundColor = "#99CCFF";
+                    button[1].style.backgroundColor = "#FFFFFF";
+                    button[2].style.backgroundColor = "#FFFFFF";
+                break;
+                case 'price':
+                    $scope.sortPrice = "high";
+                    $scope.sortName = "Name";
+                    $scope.sortDate = "Date";
+                    button[0].style.backgroundColor = "#FFFFFF";
+                    button[1].style.backgroundColor = "#99CCFF";
+                    button[2].style.backgroundColor = "	#FFFFFF";
+                break;
+                case 'release':
+                    $scope.sortDate = "latest";
+                    $scope.sortName = "Name";
+                    $scope.sortPrice = "Price";
+                    button[0].style.backgroundColor = "#FFFFFF";
+                    button[1].style.backgroundColor = "#FFFFFF";
+                    button[2].style.backgroundColor = "	#99CCFF";
+                break;
+            }
+        } 
     };
 
-    $scope.sortClass = function(col){
-        if($scope.column == col ){
-         if($scope.reverse){
-             return 'arrow-up';
-        }else{
-            return 'arrow-down'; 
-         }
-        }else{
-         return '';
-        }
-    };
-
-    $scope.resset = function(col){
-        $scope.column = "id";
-        $scope.reverse = true;
+    $scope.resset = function(item_name){
+        $scope.key = item_name;
+        $scope.reverse = false;
+        if($scope.key == 'item_name'){
+            $scope.sortName = "a";
+            $scope.sortPrice = "Price";
+            $scope.sortDate = "Date";
+            button[0].style.backgroundColor = "#99CCFF";
+            button[1].style.backgroundColor = "#FFFFFF";
+            button[2].style.backgroundColor = "#FFFFFF";
+        };
     }
 
 });
+
