@@ -35,16 +35,21 @@
                 <li class="nav-item">
                   <a active-class="active" class="nav-link" href="#!movie">Movies</a>
                 </li>
-                <li class="nav-item">
+                <li ng-show="logged" class="nav-item">
                   <a active-class="active" class="nav-link" href="#!shop-card">
                     Shop Cart
                   </a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign In</a>
+                <li ng-hide="logged" class="nav-item">
+                  <a active-class="active" class="nav-link" href="#!login">
+                    Login
+                  </a>
+                </li>
+                <li ng-show="logged" class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{userLogged.toObj().userName}}</a>
                   <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="#!login">Login</a>
                     <a class="dropdown-item" href="#!digital-wallet">Digital Wallet</a>
+                    <a class="dropdown-item" ng-click="logoutUser()">Logout</a>
                   </div>
                 </li>
               </ul>

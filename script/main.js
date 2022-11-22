@@ -26,11 +26,11 @@ mainApp.config(($routeProvider)=>{
     })
     .when('/digital-wallet',{
         templateUrl:'./template/digitalwallet.html',
-        controller:'movieControl'
+        controller:'walletControl'
     })
     .when('/login',{
         templateUrl:'./template/login.html',
-        controller:'movieControl'
+        controller:'loginControl'
     })
     .otherwise({
         templateUrl:'./template/notfound.html'
@@ -39,6 +39,13 @@ mainApp.config(($routeProvider)=>{
 mainApp.run(function($rootScope,$location, $http    ){
     $rootScope.userMap = new Map();
     $rootScope.productMap = new Map();
+    $rootScope.logged = false;
+    $rootScope.userLogged = null;
+    $rootScope.logoutUser = function(){
+        $rootScope.logged = false;
+        $rootScope.userLogged = null;
+        $location.path('/');
+    }
 
     try{
         $http.get('../data/products.json').then(
@@ -81,5 +88,24 @@ mainApp.controller('gameControl', function($scope){
 
 });
 mainApp.controller('movieControl', function($scope){
+
+});
+mainApp.controller('loginControl', function($scope, $rootScope, $location){
+    $scope.email = '';
+    $scope.password = '';
+    $scope.getLogin = function(){
+        console.log($scope.email)
+        console.log($scope.password)
+        $rootScope.userMap.forEach(function (value){
+            if(value.toObj().email == $scope.email && value.toObj().password == $scope.password){
+                $rootScope.logged = true;
+                $rootScope.userLogged = value;
+                $location.path('/');
+            }
+        });
+
+    }
+});
+mainApp.controller('walletControl', function($scope){
 
 });

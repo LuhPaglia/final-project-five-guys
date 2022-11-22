@@ -17,6 +17,18 @@ class ProductClass{
         this.#physical = physical;
         this.#digital = digital;
     }
+    toObj(){
+        return{
+            "id": this.#id,
+            "item_name": this.#item_name,
+            "price":this.#price,
+            "amount": this.#amount,
+            "category": this.#category,
+            "img_prod": this.#img_prod,
+            "physical": this.#physical,
+            "digital": this.#digital,
+        }
+    }
 }
 
 export default ProductClass;

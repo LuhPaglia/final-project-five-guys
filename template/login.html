@@ -1,1 +1,16 @@
-<h1>LOGIN</h1>
+<section style="display: flex; justify-content: center; height: 600px;">
+    <article style="width: 30%; display: flex; flex-direction: column; row-gap: 3vh;">
+        <h1>LOGIN</h1>  
+        <form style="display: flex; flex-direction: column; row-gap: 2vh;">
+            <aside class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input type="email" class="form-control" ng-model="email" placeholder="Enter email">
+            </aside>
+            <aside class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" ng-model="password" placeholder="Password">
+            </aside>
+            <button type="submit" class="btn btn-primary" style="width: 20%;" ng-click="getLogin()">Login</button>
+          </form>
+    </article>
+</section>
