@@ -83,11 +83,17 @@ mainApp.controller('gameControl',function($scope,$rootScope,$http){
 
     $scope.key = 'item_name';
     let button = document.getElementsByClassName("sortButton");
-    if($scope.key == 'item_name'){
-        $scope.sortName = "a";
-        button[0].style.backgroundColor = "	#99CCFF";
-        $scope.sortPrice = "Price";
-        $scope.sortDate = "Date";
+    $scope.chg = function(nam,price,date,col1,col2,col3,fil){
+        $scope.sortName = nam;
+        $scope.sortPrice = price;
+        $scope.sortDate = date;
+        button[0].style.backgroundColor = col1;
+        button[1].style.backgroundColor = col2;
+        button[2].style.backgroundColor = col3;
+        $scope.filterInput = fil;
+    }
+if($scope.key == 'item_name'){
+    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
     $scope.reverse = false;
     $scope.sort = function(col){
@@ -96,74 +102,36 @@ mainApp.controller('gameControl',function($scope,$rootScope,$http){
             $scope.reverse = false;
             switch($scope.key){
                 case 'item_name':
-                    $scope.sortName = "a";
-                    $scope.sortPrice = "Price";
-                    $scope.sortDate = "Date";
-                    button[0].style.backgroundColor = "#99CCFF";
-                    button[1].style.backgroundColor = "#FFFFFF";
-                    button[2].style.backgroundColor = "#FFFFFF";
+                    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.sortPrice = "row";
-                    $scope.sortName = "Name";
-                    $scope.sortDate = "Date";
-                    button[0].style.backgroundColor = "#FFFFFF";
-                    button[1].style.backgroundColor = "#99CCFF";
-                    button[2].style.backgroundColor = "	#FFFFFF";
+                    $scope.chg('Name', "row", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.sortDate = "earliest";
-                    $scope.sortName = "Name";
-                    $scope.sortPrice = "Price";
-                    button[0].style.backgroundColor = "#FFFFFF";
-                    button[1].style.backgroundColor = "#FFFFFF";
-                    button[2].style.backgroundColor = "	#99CCFF";
+                    $scope.chg('Name', "Price", "oldest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
             }
         }else{
             $scope.reverse = true;
             switch($scope.key){
                 case 'item_name':
-                    $scope.sortName = "z";
-                    $scope.sortPrice = "Price";
-                    $scope.sortDate = "Date";
-                    button[0].style.backgroundColor = "#99CCFF";
-                    button[1].style.backgroundColor = "#FFFFFF";
-                    button[2].style.backgroundColor = "#FFFFFF";
+                    $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.sortPrice = "high";
-                    $scope.sortName = "Name";
-                    $scope.sortDate = "Date";
-                    button[0].style.backgroundColor = "#FFFFFF";
-                    button[1].style.backgroundColor = "#99CCFF";
-                    button[2].style.backgroundColor = "	#FFFFFF";
+                    $scope.chg('Name', "high", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.sortDate = "latest";
-                    $scope.sortName = "Name";
-                    $scope.sortPrice = "Price";
-                    button[0].style.backgroundColor = "#FFFFFF";
-                    button[1].style.backgroundColor = "#FFFFFF";
-                    button[2].style.backgroundColor = "	#99CCFF";
+                    $scope.chg('Name', "Price", "latest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
-            }
+            }   
         } 
     };
 
     $scope.resset = function(item_name){
         $scope.key = item_name;
         $scope.reverse = false;
-        if($scope.key == 'item_name'){
-            $scope.sortName = "a";
-            $scope.sortPrice = "Price";
-            $scope.sortDate = "Date";
-            button[0].style.backgroundColor = "#99CCFF";
-            button[1].style.backgroundColor = "#FFFFFF";
-            button[2].style.backgroundColor = "#FFFFFF";
-        };
+        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     }
-
 });
 
 mainApp.controller('movieControl', function($scope,$rootScope,$http){
@@ -187,11 +155,17 @@ mainApp.controller('movieControl', function($scope,$rootScope,$http){
 
     $scope.key = 'item_name';
     let button = document.getElementsByClassName("sortButton");
-    if($scope.key == 'item_name'){
-        $scope.sortName = "a";
-        button[0].style.backgroundColor = "	#99CCFF";
-        $scope.sortPrice = "Price";
-        $scope.sortDate = "Date";
+    $scope.chg = function(nam,price,date,col1,col2,col3,fil){
+        $scope.sortName = nam;
+        $scope.sortPrice = price;
+        $scope.sortDate = date;
+        button[0].style.backgroundColor = col1;
+        button[1].style.backgroundColor = col2;
+        button[2].style.backgroundColor = col3;
+        $scope.filterInput = fil;
+    }
+if($scope.key == 'item_name'){
+    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
     $scope.reverse = false;
     $scope.sort = function(col){
@@ -200,73 +174,37 @@ mainApp.controller('movieControl', function($scope,$rootScope,$http){
             $scope.reverse = false;
             switch($scope.key){
                 case 'item_name':
-                    $scope.sortName = "a";
-                    $scope.sortPrice = "Price";
-                    $scope.sortDate = "Date";
-                    button[0].style.backgroundColor = "#99CCFF";
-                    button[1].style.backgroundColor = "#FFFFFF";
-                    button[2].style.backgroundColor = "#FFFFFF";
+                    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.sortPrice = "row";
-                    $scope.sortName = "Name";
-                    $scope.sortDate = "Date";
-                    button[0].style.backgroundColor = "#FFFFFF";
-                    button[1].style.backgroundColor = "#99CCFF";
-                    button[2].style.backgroundColor = "	#FFFFFF";
+                    $scope.chg('Name', "row", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.sortDate = "earliest";
-                    $scope.sortName = "Name";
-                    $scope.sortPrice = "Price";
-                    button[0].style.backgroundColor = "#FFFFFF";
-                    button[1].style.backgroundColor = "#FFFFFF";
-                    button[2].style.backgroundColor = "	#99CCFF";
+                    $scope.chg('Name', "Price", "oldest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
             }
         }else{
             $scope.reverse = true;
             switch($scope.key){
                 case 'item_name':
-                    $scope.sortName = "z";
-                    $scope.sortPrice = "Price";
-                    $scope.sortDate = "Date";
-                    button[0].style.backgroundColor = "#99CCFF";
-                    button[1].style.backgroundColor = "#FFFFFF";
-                    button[2].style.backgroundColor = "#FFFFFF";
+                    $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.sortPrice = "high";
-                    $scope.sortName = "Name";
-                    $scope.sortDate = "Date";
-                    button[0].style.backgroundColor = "#FFFFFF";
-                    button[1].style.backgroundColor = "#99CCFF";
-                    button[2].style.backgroundColor = "	#FFFFFF";
+                    $scope.chg('Name', "high", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.sortDate = "latest";
-                    $scope.sortName = "Name";
-                    $scope.sortPrice = "Price";
-                    button[0].style.backgroundColor = "#FFFFFF";
-                    button[1].style.backgroundColor = "#FFFFFF";
-                    button[2].style.backgroundColor = "	#99CCFF";
+                    $scope.chg('Name', "Price", "latest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
-            }
+            }   
         } 
     };
 
     $scope.resset = function(item_name){
         $scope.key = item_name;
         $scope.reverse = false;
-        if($scope.key == 'item_name'){
-            $scope.sortName = "a";
-            $scope.sortPrice = "Price";
-            $scope.sortDate = "Date";
-            button[0].style.backgroundColor = "#99CCFF";
-            button[1].style.backgroundColor = "#FFFFFF";
-            button[2].style.backgroundColor = "#FFFFFF";
-        };
-    }
-
+        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+    };
 });
+
+ 
 

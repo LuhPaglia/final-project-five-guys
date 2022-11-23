@@ -1,6 +1,6 @@
 <section>
     <article>
-        <input ng-model="filterInput.item_name" placeholder="search"/>
+        <input class="filterName" ng-model="filterInput.item_name" placeholder="search"/>
         <button class="sortButton" ng-click="sort('item_name')">{{sortName}}</button>
         <button class="sortButton" ng-click="sort('price')">{{sortPrice}}</button>
         <button class="sortButton" ng-click="sort('release')">{{sortDate}}</button>
@@ -25,9 +25,11 @@
     </article>
 </section>
 <style>
+
     .sortButton{
         width: 100px;
     }
+
     .movies{
         padding-top: 50px;
         display: flex;
@@ -37,40 +39,28 @@
         column-gap: 2.5%;
         row-gap: 5vh;
     }
-    .carousel-item{
-        height: 60vh;
-    }
-    .carousel-caption{
-        background-color: rgba(11, 11, 11, 0.6);
-    }
-    .row-title{
-        font-size: 30px;
-        text-transform: uppercase;
-        color: #10002B;
-    }
+    
     .h-100{
         display: flex;
         align-items: center;
         background-color: antiquewhite;
     }
+
     .card-img-top{
         width: 150px;
         height: 200px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
     }
-    .gamepart{
-        padding-right: 8%;
-        padding-left: 8%;
-    }
+
     .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 300px;
     margin: auto;
     text-align: center;
     font-family: arial;
-    
     }
+
     .price {
     color: grey;
     font-size: 22px;
