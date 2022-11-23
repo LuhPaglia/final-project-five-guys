@@ -97,9 +97,6 @@ mainApp.run(function($rootScope,$location, $http    ){
                 $rootScope.bestMovies.push(productItem)
             }
         })
-        // console.log($rootScope.bestBooks)
-        // console.log($rootScope.bestMovies)
-        // console.log($rootScope.bestGames)
     }
 
 })
@@ -125,7 +122,11 @@ mainApp.controller('loginControl', function($scope, $rootScope, $location){
             if(value.toObj().email == $scope.email && value.toObj().password == $scope.password){
                 $rootScope.logged = true;
                 $rootScope.userLogged = value;
-
+                let temp = $rootScope.cartMap
+                $rootScope.cartMap = new shopCart(value.toObj().customerId);  
+                for(const item of temp.getAllValues()){
+                    $rootScope.cartMap.addItem(item);
+                }
                 $location.path('/');
             }
         });
@@ -140,18 +141,14 @@ mainApp.controller('shopControl', function($rootScope, $scope){
         
         let selItem = $rootScope.productMap.get(itemId);
         selItem = selItem.toObj()
+        selItem.amount = 1;
 
         if($rootScope.cartMap.hasItem(itemId)){
-            console.log("Existe")
             selItem = $rootScope.cartMap.getItem(itemId)
-            selItem.qty = selItem.qty + 1
-        }else{
-            console.log("Nao existe")
-            selItem = {...selItem, qty:1}
+            selItem.amount = selItem.amount + 1
         }
         $rootScope.cartMap.addItem(selItem)
 
-        console.log($rootScope.cartMap)
         $rootScope.cartArray = [];
         for(let product of $rootScope.cartMap.getAllValues()){
             $rootScope.cartArray.push(product)
@@ -165,7 +162,6 @@ mainApp.controller('shopControl', function($rootScope, $scope){
         for(const item of $rootScope.cartMap.getAllValues()){
             $rootScope.cartArray.push(item);
         }
-
         $rootScope.calTotal();
     };
 

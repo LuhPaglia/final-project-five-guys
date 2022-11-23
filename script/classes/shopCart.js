@@ -18,11 +18,11 @@ class shopCart{
         this.#shopMap.delete(itemId);
     }
     calTotalMap(){
-        let sum = 0;
+        let total = 0;
         for(const product of this.getAllValues()){
-            sum += product.price * product.qty;
+            total += product.price * product.amount;
         }
-        return sum;
+        return total;
     }
     getAllValues(){
         return this.#shopMap.values();

@@ -10,24 +10,33 @@
             <tr>
                 <th>Product</th>
                 <th>Name</th>
-                <!-- <th>Type</th> -->
+                <th>Type</th>
                 <th>Category</th>
                 <th>Price</th>
                 <th>Amount</th>
                 <th>Total</th>
-                <th>Options</th>
+                <th>Option</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
                 <tr class="table-light" ng-repeat="(idx, item) in cartArray">
                     <td scope="row">{{idx+1}}</td>
                     <td>{{item.item_name}}</td>
-                    <!-- <td>{{item.physical}}</td> -->
+                    <td class="checkOpt">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="dhysical" value="physical">
+                            <label class="form-check-label" for="Physical">Physical</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="digital" value="digital">
+                            <label class="form-check-label" for="digital">Digital</label>
+                        </div>
+                    </td>
                     <td class="cat">{{item.category}}</td>
                     <td>{{item.price | currency}}</td>
-                    <td>{{item.qty}}</td>
+                    <td>{{item.amount}}</td>
                     <td>
-                        {{item.price * item.qty | currency}}
+                        {{item.price * item.amount | currency}}
                     </td>
                     <td>
                         <button type="button" class="btn btn-secondary" ng-click="delItem(item.id)">Remove</button>
@@ -36,7 +45,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="8">
+                    <td class="totalTd" colspan="8">
                         Total: {{calTotal() | currency}}
                     </td>
                 </tr>
@@ -47,6 +56,15 @@
 <style>
     .cat{
         text-transform: capitalize;
+    }
+    th, td{
+        text-align: center;
+    }
+    .totalTd{
+        text-align: left;
+    }
+    .checkOpt{
+        font-size: 14px;
     }
 </style>
 
