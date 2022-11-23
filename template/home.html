@@ -1,6 +1,4 @@
 <section class="home-wrapper d-grid gap-3">
-    <h1>HOME PAGE</h1>
-    
     <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
         <ol class="carousel-indicators">
             <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
@@ -45,167 +43,71 @@
     <div class="container">
         <span class="row-title">
             Best books
+
+            <!-- <a class="btn btn-dark" role="button" href="#!book">See More
+              <i class="fa-solid fa-plus"></i>
+            </a> -->
         </span>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <!-- <p class="row">BEST BOOKS</p> -->
-            <div class="col">
+        <div class="row row-cols-1 row-cols-md-4" >
+            <div class="col" ng-repeat="book in bestBooks">
               <div class="card h-100">
-                <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
+                <img src="../img/books/{{book.img_prod}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
+                  <h5 class="card-title">{{book.item_name}}</h5>
+                  <p class="card-text">{{book.price | currency}}</p>
                   <span>
-                    <a class="fa-solid fa-cart-arrow-down"></a>
+
+
+                    <a class="btn btn-light" role="button" ng-click="buyItem(book.id)">Add to cart
+                      <i class="fa-solid fa-cart-arrow-down"></i>
+                    </a>
                   </span>
                 </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                  <span>
-                    <a class="fa-solid fa-cart-arrow-down"></a>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                  <span>
-                    <a class="fa-solid fa-cart-arrow-down"></a>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                  <span>
-                    <a class="fa-solid fa-cart-arrow-down"></a>
-                  </span>
-                </div>
-              </div>
-            </div>
+          </div>
     </div>
     <div class="container">
         <span class="row-title">
             Best Games
         </span>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <!-- <p class="row">BEST BOOKS</p> -->
-            <div class="col">
-              <div class="card h-100">
-                <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                  <span>
-                    <a class="fa-solid fa-cart-arrow-down"></a>
-                  </span>
-                </div>
+        <div class="row row-cols-1 row-cols-md-4" >
+          <div class="col" ng-repeat="game in bestGames">
+            <div class="card h-100">
+              <img src="../img/games/{{game.img_prod}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{game.item_name}}</h5>
+                <p class="card-text">{{game.price | currency}}</p>
+                <span>
+                  <a class="btn btn-light" role="button" ng-click="buyItem(game.id)">Add to cart
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                  </a>
+                </span>
               </div>
             </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                  <span>
-                    <a class="fa-solid fa-cart-arrow-down"></a>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                  <span>
-                    <a class="fa-solid fa-cart-arrow-down"></a>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                  <span>
-                    <a class="fa-solid fa-cart-arrow-down"></a>
-                  </span>
-                </div>
-              </div>
-            </div>
+        </div>
+
         </div>
     </div>
     <div class="container">
         <span class="row-title">
             Best Films
         </span>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-          <div class="col">
+        <div class="row row-cols-1 row-cols-md-4" >
+          <div class="col" ng-repeat="movie in bestMovies">
             <div class="card h-100">
-              <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
+              <img src="../img/movies/{{movie.img_prod}}" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
+                <h5 class="card-title">{{movie.item_name}}</h5>
+                <p class="card-text">{{movie.price | currency}}</p>
                 <span>
-                  <a class="fa-solid fa-cart-arrow-down"></a>
+                  <a class="btn btn-light" role="button" ng-click="buyItem(movie.id)">Add to cart
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                  </a>
                 </span>
               </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                <span>
-                  <a class="fa-solid fa-cart-arrow-down"></a>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                <span>
-                  <a class="fa-solid fa-cart-arrow-down"></a>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="../media/img/book4.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Description. Later we can see with we need to add buttons, links, or anything else</p>
-                <span>
-                  <a class="fa-solid fa-cart-arrow-down"></a>
-                </span>
-              </div>
-            </div>
-          </div>
+        </div>
+
         </div>
     </div>
 
@@ -213,6 +115,10 @@
 
 
 <style>
+    .row-title{
+      display: flex;
+      justify-content: space-between;
+    }
     .carousel-item{
         height: 60vh;
       }
@@ -229,18 +135,42 @@
     }
     .card span{
       display: flex;
-      justify-content: right;
+      justify-content: center;
     }
-    .card span a{
+    .card span i{
       font-size: 20px;
       color: #10002B;
       border: 0px none none;
       text-decoration: none;
-      padding-right: 2vh;
     }
-    .card span a:hover{
-      cursor: pointer;
+    .card a{
+      border:1px solid #10002B;
+      font-size: 14px;
+      justify-content: center;
+    }
+    .card a:hover{
       color: #9C9290;
+    }
+    .card a:hover i {
+      color: #9C9290;
+    }
+    .card img {
+      width: 30vh;
+      height: 40vh;
+    }
+    .card{
+      align-items: center;
+      padding-top: 3vh;
+    }
+    .card h5{
+      text-align: center;
+      height: 8vh;
+    }
+    .card p{
+      text-align: center;
+    }
+    .card-body{
+      width: 100%;
     }
 
 </style>

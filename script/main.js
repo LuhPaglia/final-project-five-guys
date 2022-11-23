@@ -1,12 +1,13 @@
 const mainApp = angular.module('mainApp',['ngRoute']);
 import ProductClass from './classes/ProductClass.js';
 import UserClass from './classes/UserClass.js';
+import shopCart from './classes/shopCart.js'
 
 mainApp.config(($routeProvider)=>{
     $routeProvider
     .when('/',{
         templateUrl:'./template/home.html',
-        controller: 'homeControl'
+        controller: 'shopControl'
     })
     .when('/book',{
         templateUrl:'./template/book.html',
@@ -22,7 +23,7 @@ mainApp.config(($routeProvider)=>{
     })
     .when('/shop-card',{
         templateUrl:'./template/shopcart.html',
-        controller:'movieControl'
+        controller:'shopControl'
     })
     .when('/digital-wallet',{
         templateUrl:'./template/digitalwallet.html',
@@ -46,6 +47,9 @@ mainApp.run(function($rootScope,$location, $http    ){
         $rootScope.userLogged = null;
         $location.path('/');
     }
+    $rootScope.cartArray = [];
+    $rootScope.cartMap = new shopCart(99);
+
 
     try{
         $http.get('../data/products.json').then(
@@ -55,6 +59,7 @@ mainApp.run(function($rootScope,$location, $http    ){
                         let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
                         $rootScope.productMap.set(value.id,newProduct);
                     })
+                    $rootScope.popBestProducts()
                 }
             },
             (reject)=>{console.log(reject)}
@@ -77,6 +82,23 @@ mainApp.run(function($rootScope,$location, $http    ){
     }catch(e){
         console.log(e);
     };
+    $rootScope.popBestProducts = function(){
+        $rootScope.bestBooks = new Array()
+        $rootScope.bestMovies = new Array()
+        $rootScope.bestGames = new Array()
+
+        $rootScope.productMap.forEach((item, idx)=>{
+            let productItem = item.toObj()
+            if(productItem.category=='book' && $rootScope.bestBooks.length < 4){
+                $rootScope.bestBooks.push(productItem)
+            }else if (productItem.category=='game' && $rootScope.bestGames.length < 4){
+                $rootScope.bestGames.push(productItem)
+            }else if (productItem.category=='movie' && $rootScope.bestMovies.length < 4){
+                $rootScope.bestMovies.push(productItem)
+            }
+        })
+    }
+
 })
 mainApp.controller('homeControl', function($scope){
 
@@ -100,6 +122,11 @@ mainApp.controller('loginControl', function($scope, $rootScope, $location){
             if(value.toObj().email == $scope.email && value.toObj().password == $scope.password){
                 $rootScope.logged = true;
                 $rootScope.userLogged = value;
+                let temp = $rootScope.cartMap
+                $rootScope.cartMap = new shopCart(value.toObj().customerId);  
+                for(const item of temp.getAllValues()){
+                    $rootScope.cartMap.addItem(item);
+                }
                 $location.path('/');
             }
         });
@@ -108,4 +135,37 @@ mainApp.controller('loginControl', function($scope, $rootScope, $location){
 });
 mainApp.controller('walletControl', function($scope){
 
+});
+mainApp.controller('shopControl', function($rootScope, $scope){
+    $rootScope.buyItem = function(itemId){
+        
+        let selItem = $rootScope.productMap.get(itemId);
+        selItem = selItem.toObj()
+        selItem.amount = 1;
+
+        if($rootScope.cartMap.hasItem(itemId)){
+            selItem = $rootScope.cartMap.getItem(itemId)
+            selItem.amount = selItem.amount + 1
+        }
+        $rootScope.cartMap.addItem(selItem)
+
+        $rootScope.cartArray = [];
+        for(let product of $rootScope.cartMap.getAllValues()){
+            $rootScope.cartArray.push(product)
+        }
+        $rootScope.calTotal();
+    };
+    $rootScope.delItem = function(itemId){
+        $rootScope.cartMap.delProduct(itemId)
+
+        $rootScope.cartArray = [];
+        for(const item of $rootScope.cartMap.getAllValues()){
+            $rootScope.cartArray.push(item);
+        }
+        $rootScope.calTotal();
+    };
+
+    $rootScope.calTotal = function(){
+        return $rootScope.cartMap.calTotalMap()
+    }
 });
