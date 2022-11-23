@@ -39,21 +39,33 @@ mainApp.config(($routeProvider)=>{
 mainApp.run(function($rootScope,$location,$http){
     $rootScope.userMap = new Map();
     $rootScope.productMap = new Map();
-    try{
-        $http.get('../data/users.json').then(
-            (response)=>{
-                if(response.status==200){
-                    response.data.forEach((value)=>{
-                        let newUser = new UserClass(value.customerId, value.userName, value.first_name, value.last_name, value.password, value.email);
-                        $rootScope.userMap.set(value.customerId,newUser);
-                    })
-                }
-            },
-            (reject)=>{console.log(reject)}
-        )
-    }catch(e){
-        console.log(e);
-    };
+
+    $http.get('../data/products.json').then(
+        (response)=>{
+            if(response.status==200){
+                console.log(response.data);
+                $rootScope.productsData = response.data;
+                response.data.map((value)=>{
+                    let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
+                    $rootScope.productMap.set(value.id,newProduct);
+                })
+            }
+        },
+        (reject)=>{console.log(reject)}
+    );
+    
+    $http.get('../data/users.json').then(
+        (response)=>{
+            if(response.status==200){
+                response.data.forEach((value)=>{
+                    let newUser = new UserClass(value.customerId, value.userName, value.first_name, value.last_name, value.password, value.email);
+                    $rootScope.userMap.set(value.customerId,newUser);
+                })
+            }
+        },
+        (reject)=>{console.log(reject)}
+    )
+
 })
 mainApp.controller('homeControl', function($scope){
 
@@ -62,26 +74,8 @@ mainApp.controller('bookControl', function($scope,$rootScope,$http){
     
 });
 
-mainApp.controller('gameControl',function($scope,$rootScope,$http){
-    try{
-        $http.get('../data/products.json').then(
-            (response)=>{
-                if(response.status==200){
-                    console.log(response.data);
-                    $scope.productsData = response.data;
-                    response.data.map((value)=>{
-                        let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
-                        $rootScope.productMap.set(value.id,newProduct);
-                    })
-                }
-            },
-            (reject)=>{console.log(reject)}
-        )
-    }catch(e){
-        console.log(e);
-    };
-
-    $scope.key = 'item_name';
+mainApp.controller('gameControl',function($scope){
+    $scope.keyName = 'item_name';
     let button = document.getElementsByClassName("sortButton");
     $scope.chg = function(nam,price,date,col1,col2,col3,fil){
         $scope.sortName = nam;
@@ -92,15 +86,16 @@ mainApp.controller('gameControl',function($scope,$rootScope,$http){
         button[2].style.backgroundColor = col3;
         $scope.filterInput = fil;
     }
-if($scope.key == 'item_name'){
-    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+
+    if($scope.keyName == 'item_name'){
+        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
     $scope.reverse = false;
-    $scope.sort = function(col){
-        $scope.key = col;
+    $scope.sort = function(key){
+        $scope.keyName = key;
         if($scope.reverse == true){
             $scope.reverse = false;
-            switch($scope.key){
+            switch($scope.keyName){
                 case 'item_name':
                     $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
@@ -113,7 +108,7 @@ if($scope.key == 'item_name'){
             }
         }else{
             $scope.reverse = true;
-            switch($scope.key){
+            switch($scope.keyName){
                 case 'item_name':
                     $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
@@ -128,32 +123,14 @@ if($scope.key == 'item_name'){
     };
 
     $scope.resset = function(item_name){
-        $scope.key = item_name;
+        $scope.keyName = item_name;
         $scope.reverse = false;
         $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     }
 });
 
-mainApp.controller('movieControl', function($scope,$rootScope,$http){
-    try{
-        $http.get('../data/products.json').then(
-            (response)=>{
-                if(response.status==200){
-                    console.log(response.data);
-                    $scope.productsData = response.data;
-                    response.data.map((value)=>{
-                        let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
-                        $rootScope.productMap.set(value.id,newProduct);
-                    })
-                }
-            },
-            (reject)=>{console.log(reject)}
-        )
-    }catch(e){
-        console.log(e);
-    };
-
-    $scope.key = 'item_name';
+mainApp.controller('movieControl', function($scope){
+    $scope.keyName = 'item_name';
     let button = document.getElementsByClassName("sortButton");
     $scope.chg = function(nam,price,date,col1,col2,col3,fil){
         $scope.sortName = nam;
@@ -164,15 +141,16 @@ mainApp.controller('movieControl', function($scope,$rootScope,$http){
         button[2].style.backgroundColor = col3;
         $scope.filterInput = fil;
     }
-if($scope.key == 'item_name'){
+
+if($scope.keyName == 'item_name'){
     $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
     $scope.reverse = false;
-    $scope.sort = function(col){
-        $scope.key = col;
+    $scope.sort = function(key){
+        $scope.keyName = key;
         if($scope.reverse == true){
             $scope.reverse = false;
-            switch($scope.key){
+            switch($scope.keyName){
                 case 'item_name':
                     $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
@@ -185,7 +163,7 @@ if($scope.key == 'item_name'){
             }
         }else{
             $scope.reverse = true;
-            switch($scope.key){
+            switch($scope.keyName){
                 case 'item_name':
                     $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
@@ -200,7 +178,7 @@ if($scope.key == 'item_name'){
     };
 
     $scope.resset = function(item_name){
-        $scope.key = item_name;
+        $scope.keyName = item_name;
         $scope.reverse = false;
         $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };

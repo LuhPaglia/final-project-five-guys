@@ -9,7 +9,7 @@
 
   <article>
     <div class="games">
-      <div ng-repeat="game in productsData | filter : {category:'game'} | filter : filterInput | orderBy : key : reverse" class="row row-cols-1 row-cols-md-4 g-4">
+      <div ng-repeat="game in productsData | filter : {category:'game'} | filter : filterInput | orderBy : keyName : reverse" class="row row-cols-1 row-cols-md-4 g-4">
         <class="col">
         <div class="card h-100">
           <img src="../img/games/{{game.img_prod}}" class="card-img-top" alt="{{game.item_name}}">
@@ -17,110 +17,65 @@
             <h5 class="card-title">{{game.item_name}}</h5>
             <p class="card-price">{{game.price | currency}}</p>
             <p class="card-release">{{game.release}}</p>
-            <button>Add to Cart</button>
           </div>
+          <button class="addButton" ng-click="addCart()">Add to Cart</button>
         </div>
       </div>
     </div>
   </article>
 </section>
 
-<script>
-  function modalContent(idx,productsData){
-      let mCont = $('#stDetails .m-content');
-      mCont.children().remove();
-      mCont.append(`<h3>Name: ${stDetails.first_name} ${stDetails.last_name}</h3>`);
-      mCont.append(`<h3>Email: ${stDetails.email}</h3>`);
-      mCont.append(`<h3>Gender: ${stDetails.gender} | Country: ${stDetails.Country} | Language: ${stDetails.lang}</h3>`);
-      let select = $('<select></select>');
-      $.each(courses,function(idx,val){
-          select.append(`<option value='${val.val}'>${val.txt}</option>`);
-      })
-      select.change(function(){
-          $(this).next().attr('disabled',false);
-      })
-      mCont.append(select);
-      mCont.append("<input placeholder='write the mark' disabled/>");
-      let saveBtn = $("<button>Save</button>");
-      saveBtn.click(function(){
-          let cName = $('select').val();
-          let mark = parseFloat($(this).prev().val());
-          if(savedStudents.has(idx)){
-              let studentObj = savedStudents.get(idx);
-              studentObj.updateMarks({cname:cName,cmark:mark});
-              console.log(savedStudents);
-          }else{
-              let studentObj = new stObj(stDetails,[{cname:cName,cmark:mark}]);
-              savedStudents.set(idx,studentObj);
-          }
-          $(this).parentsUntil('body').fadeOut();
-      });
-      mCont.append(saveBtn);
-      if(savedStudents.has(idx)){
-          let stObj = savedStudents.get(idx);
-          $.each(stObj.marks,function(idx,mark){
-              mCont.append(`<h5>course Name:${mark.cname} | ${mark.cmark}</h5>`);
-          })
-          mCont.append(`<h4>Avg: ${stObj.avg()} | max: ${stObj.max()}</h4>`);
-      }
-  }
-</script>
-
 <style>
+.sortButton{
+  width: 100px;
+}
 
-    .sortButton{
-        width: 100px;
-    }
+.games{
+  padding-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 7%;
+  padding-right: 7%;
+  column-gap: 2.5%;
+  row-gap: 5vh;
+}
 
-    .games{
-        padding-top: 50px;
-        display: flex;
-        flex-wrap: wrap;
-        padding-left: 7%;
-        padding-right: 7%;
-        column-gap: 2.5%;
-        row-gap: 5vh;
-    }
+.card-img-top{
+  width: 150px;
+  height: 200px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
 
-    .h-100{
-        display: flex;
-        align-items: center;
-        background-color: antiquewhite;
-    }
+.card {
+  display: flex;
+  align-items: center;
+  background-color: antiquewhite;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
 
-    .card-img-top{
-        width: 150px;
-        height: 200px;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-    }
+.price {
+  color: grey;
+  font-size: 22px;
+}
 
-    .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 300px;
-    margin: auto;
-    text-align: center;
-    font-family: arial;
-    }
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
 
-    .price {
-    color: grey;
-    font-size: 22px;
-    }
-
-    .card button {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-    }
-
-    .card button:hover {
-    opacity: 0.7;
-    }
-    </style>
+.card button:hover {
+  opacity: 0.7;
+}
+</style>
