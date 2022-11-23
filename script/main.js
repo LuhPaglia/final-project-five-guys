@@ -36,6 +36,7 @@ mainApp.config(($routeProvider)=>{
         templateUrl:'./template/notfound.html'
     })
 });
+//runは一番最初に読み込まれる
 mainApp.run(function($rootScope,$location,$http){
     $rootScope.userMap = new Map();
     $rootScope.productMap = new Map();
@@ -62,7 +63,41 @@ mainApp.controller('homeControl', function($scope){
 
 });
 mainApp.controller('bookControl', function($scope,$rootScope,$http){
-    
+// try{
+        $http.get('../data/products.json').then(
+            (response)=>{
+                // falseの場合は404
+                // trueは200
+                if(response.status==200){
+                    console.log(response.data); 
+                    $scope.productsData = response.data;
+                    response.data.map((value)=>{
+                        console.log(value);
+                        // クラスを使ってinstanceを作る際は絶対にNewをつける
+                        let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
+                        $rootScope.productMap.set(value.id,newProduct);
+                        // key（ $rootScope.productMap）を使ってvalueをセットする
+                        // setはmapでしか使えない
+
+                        // mpaはget,set,delete,hasも4つがある
+                        // deleteはkeyを使ってvalueを削除する
+                        // getはkeyを使ってvalueを取得する
+                        // hasはkeyを使ってvalueをあるかどうか確認する
+
+                        // Arrayはindex順番でvalueを得る。
+                        // mapはkeyを使ってvalue得る
+
+                    })
+                }
+            },
+            (reject)=>{console.log(reject)}
+        )
+    // }catch(e){
+    //     console.log(e);
+    // };
+    $scope.show = function(){
+        console.log($scope.input)
+    }
 });
 
 mainApp.controller('gameControl',function($scope,$rootScope,$http){
