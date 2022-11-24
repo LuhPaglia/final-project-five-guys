@@ -152,7 +152,7 @@ mainApp.controller('bookControl', function($scope){
         } 
     };
 
-    $scope.resset = function(item_name){
+    $scope.reset = function(item_name){
         $scope.keyName = item_name;
         $scope.reverse = false;
         $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
@@ -206,7 +206,7 @@ mainApp.controller('gameControl', function($scope){
         } 
     };
 
-    $scope.resset = function(item_name){
+    $scope.reset = function(item_name){
         $scope.keyName = item_name;
         $scope.reverse = false;
         $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
@@ -260,7 +260,7 @@ if($scope.keyName == 'item_name'){
         } 
     };
 
-    $scope.resset = function(item_name){
+    $scope.reset = function(item_name){
         $scope.keyName = item_name;
         $scope.reverse = false;
         $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");

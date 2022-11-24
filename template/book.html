@@ -9,11 +9,11 @@
           <button class="sortButton" ng-click="sort('item_name')">{{sortName}}</button>
           <button class="sortButton" ng-click="sort('price')">{{sortPrice}}</button>
           <button class="sortButton" ng-click="sort('release')">{{sortDate}}</button>
-          <button class="sortButton" ng-click="resset('item_name')">Reset</button>
+          <button class="sortButton" ng-click="reset('item_name')">Reset</button>
       </article>
 
         <div class="row row-cols-1 row-cols-md-4" >
-          <div class="col" ng-repeat="book in productsData | filter : {category:'book'} | filter : filterInput | orderBy : key : reverse">
+          <div class="col" ng-repeat="book in productsData | filter : {category:'book'} | filter : filterInput | orderBy : keyName : reverse">
             <div class="card h-100">
               <img src="../img/books/{{book.img_prod}}" class="card-img-top" alt="...">
               <div class="card-body">
