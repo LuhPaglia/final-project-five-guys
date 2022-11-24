@@ -118,7 +118,7 @@ mainApp.controller('bookControl', function($scope){
     }
 
     if($scope.keyName == 'item_name'){
-        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+        $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
     $scope.reverse = false;
     $scope.sort = function(key){
@@ -127,26 +127,26 @@ mainApp.controller('bookControl', function($scope){
             $scope.reverse = false;
             switch($scope.keyName){
                 case 'item_name':
-                    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                    $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.chg('Name', "row", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                    $scope.chg('Name', "Low", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.chg('Name', "Price", "oldest","#FFFFFF","#FFFFFF","#99CCFF");
+                    $scope.chg('Name', "Price", "Oldest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
             }
         }else{
             $scope.reverse = true;
             switch($scope.keyName){
                 case 'item_name':
-                    $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                    $scope.chg('Z - A', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.chg('Name', "high", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                    $scope.chg('Name', "High", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.chg('Name', "Price", "latest","#FFFFFF","#FFFFFF","#99CCFF");
+                    $scope.chg('Name', "Price", "Latest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
             }   
         } 
@@ -155,7 +155,7 @@ mainApp.controller('bookControl', function($scope){
     $scope.reset = function(item_name){
         $scope.keyName = item_name;
         $scope.reverse = false;
-        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+        $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
 });
 mainApp.controller('gameControl', function($scope){
@@ -172,7 +172,7 @@ mainApp.controller('gameControl', function($scope){
     }
 
     if($scope.keyName == 'item_name'){
-        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+        $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
     $scope.reverse = false;
     $scope.sort = function(key){
@@ -181,26 +181,26 @@ mainApp.controller('gameControl', function($scope){
             $scope.reverse = false;
             switch($scope.keyName){
                 case 'item_name':
-                    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                    $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.chg('Name', "row", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                    $scope.chg('Name', "Low", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.chg('Name', "Price", "oldest","#FFFFFF","#FFFFFF","#99CCFF");
+                    $scope.chg('Name', "Price", "Oldest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
             }
         }else{
             $scope.reverse = true;
             switch($scope.keyName){
                 case 'item_name':
-                    $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                    $scope.chg('Z - A', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.chg('Name', "high", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                    $scope.chg('Name', "High", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.chg('Name', "Price", "latest","#FFFFFF","#FFFFFF","#99CCFF");
+                    $scope.chg('Name', "Price", "Latest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
             }   
         } 
@@ -209,7 +209,7 @@ mainApp.controller('gameControl', function($scope){
     $scope.reset = function(item_name){
         $scope.keyName = item_name;
         $scope.reverse = false;
-        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+        $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
 });
 mainApp.controller('movieControl', function($scope){
@@ -226,7 +226,7 @@ mainApp.controller('movieControl', function($scope){
     }
 
 if($scope.keyName == 'item_name'){
-    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+    $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
     $scope.reverse = false;
     $scope.sort = function(key){
@@ -235,26 +235,26 @@ if($scope.keyName == 'item_name'){
             $scope.reverse = false;
             switch($scope.keyName){
                 case 'item_name':
-                    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                    $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.chg('Name', "row", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                    $scope.chg('Name', "Low", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.chg('Name', "Price", "oldest","#FFFFFF","#FFFFFF","#99CCFF");
+                    $scope.chg('Name', "Price", "Oldest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
             }
         }else{
             $scope.reverse = true;
             switch($scope.keyName){
                 case 'item_name':
-                    $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                    $scope.chg('Z - A', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
                 break;
                 case 'price':
-                    $scope.chg('Name', "high", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                    $scope.chg('Name', "High", "Date","#FFFFFF","#99CCFF","#FFFFFF");
                 break;
                 case 'release':
-                    $scope.chg('Name', "Price", "latest","#FFFFFF","#FFFFFF","#99CCFF");
+                    $scope.chg('Name', "Price", "Latest","#FFFFFF","#FFFFFF","#99CCFF");
                 break;
             }   
         } 
@@ -263,7 +263,7 @@ if($scope.keyName == 'item_name'){
     $scope.reset = function(item_name){
         $scope.keyName = item_name;
         $scope.reverse = false;
-        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+        $scope.chg('A - Z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
     };
 });
 mainApp.controller('loginControl', function($scope, $rootScope, $location){
