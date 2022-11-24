@@ -1,16 +1,37 @@
 <section>
-    <article>
-      <input class="filterName" ng-model="filterInput.item_name" placeholder="search"/>
-      <button class="sortButton" ng-click="sort('item_name')">{{sortName}}</button>
-      <button class="sortButton" ng-click="sort('price')">{{sortPrice}}</button>
-      <button class="sortButton" ng-click="sort('release')">{{sortDate}}</button>
-      <button class="sortButton" ng-click="resset('item_name')">Resset</button>
-    </article>
-  
-    <article>
-      <div class="books">
+  <article>
+    <div class="container">
+      <article id="navFilter" class="d-flex justify-content-center 
+      align-items-center
+      ">
+        <input class="filterName" ng-model="filterInput.item_name" placeholder="Search product"/>
+          <span>Sort by:</span>
+          <button class="sortButton" ng-click="sort('item_name')">{{sortName}}</button>
+          <button class="sortButton" ng-click="sort('price')">{{sortPrice}}</button>
+          <button class="sortButton" ng-click="sort('release')">{{sortDate}}</button>
+          <button class="sortButton" ng-click="resset('item_name')">Reset</button>
+      </article>
+
+        <div class="row row-cols-1 row-cols-md-4" >
+          <div class="col" ng-repeat="book in productsData | filter : {category:'book'} | filter : filterInput | orderBy : key : reverse">
+            <div class="card h-100">
+              <img src="../img/books/{{book.img_prod}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{book.item_name}}</h5>
+                <p class="card-text">{{book.price | currency}}</p>
+              <p class="card-release">{{book.release}}</p>
+                <span>
+                  <a class="btn btn-light" role="button" ng-click="buyItem(book.id)">Add to cart
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                  </a>
+                </span>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- <div class="books">
         <div ng-repeat="book in productsData | filter : {category:'book'} | filter : filterInput | orderBy : key : reverse" class="row row-cols-1 row-cols-md-4 g-4">
-        <class="col">
+        <div class="col">
           <div class="card h-100">
             <img src="../img/books/{{book.img_prod}}" class="card-img-top" alt="{{book.item_name}}">
             <div class="card-body">
@@ -21,16 +42,30 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </article>
   </section>
   
   <style>
     .sortButton{
-      width: 100px;
+      width: 20vh;
+      border-radius: 5px;
+      border: 0px none transparent;
+    }
+    #navFilter{
+      margin-top: 2vh;
+      margin-bottom: 0.5vh;
+      background-color: #9C9290;
+      border-radius: 5px;
+      height: 5vh;
+      column-gap: 5vh;
+      padding: 3vh;
+    }
+    input::placeholder{
+      font-size: 14px;
     }
     
-    .books{
+    /* .books{
       padding-top: 50px;
       display: flex;
       flex-wrap: wrap;
@@ -77,5 +112,49 @@
     
     .card button:hover {
       opacity: 0.7;
+    } */
+
+    .row{
+      row-gap: 2vh;
     }
+    .card span{
+      display: flex;
+      justify-content: center;
+    }
+    .card span i{
+      font-size: 20px;
+      color: #10002B;
+      border: 0px none none;
+      text-decoration: none;
+    }
+    .card a{
+      border:1px solid #10002B;
+      font-size: 14px;
+      justify-content: center;
+    }
+    .card a:hover{
+      color: #9C9290;
+    }
+    .card a:hover i {
+      color: #9C9290;
+    }
+    .card img {
+      width: 30vh;
+      height: 40vh;
+    }
+    .card{
+      align-items: center;
+      padding-top: 3vh;
+    }
+    .card h5{
+      text-align: center;
+      height: 8vh;
+    }
+    .card p{
+      text-align: center;
+    }
+    .card-body{
+      width: 100%;
+    }
+
     </style>
