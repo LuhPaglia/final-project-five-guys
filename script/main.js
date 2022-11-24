@@ -347,6 +347,8 @@ mainApp.controller('shopControl', function($rootScope, $scope, $location){
         }
     }
     $scope.checkinShop = function(){
+        $rootScope.cartArray = [];
+        $rootScope.calTotal();
         $scope.hasDigital = false;
         $scope.digitalProd.forEach(function (value){
             switch(value.toObj().category){
