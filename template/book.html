@@ -1,1 +1,81 @@
-<h1>Book's Page</h1>
+<section>
+    <article>
+      <input class="filterName" ng-model="filterInput.item_name" placeholder="search"/>
+      <button class="sortButton" ng-click="sort('item_name')">{{sortName}}</button>
+      <button class="sortButton" ng-click="sort('price')">{{sortPrice}}</button>
+      <button class="sortButton" ng-click="sort('release')">{{sortDate}}</button>
+      <button class="sortButton" ng-click="resset('item_name')">Resset</button>
+    </article>
+  
+    <article>
+      <div class="books">
+        <div ng-repeat="book in productsData | filter : {category:'book'} | filter : filterInput | orderBy : key : reverse" class="row row-cols-1 row-cols-md-4 g-4">
+        <class="col">
+          <div class="card h-100">
+            <img src="../img/books/{{book.img_prod}}" class="card-img-top" alt="{{book.item_name}}">
+            <div class="card-body">
+              <h5 class="card-title">{{book.item_name}}</h5>
+              <p class="card-price">{{book.price | currency}}</p>
+              <p class="card-release">{{book.release}}</p>
+              <button class="addButton" ng-click="buyItem(book.id)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+  
+  <style>
+    .sortButton{
+      width: 100px;
+    }
+    
+    .books{
+      padding-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 7%;
+      padding-right: 7%;
+      column-gap: 2.5%;
+      row-gap: 5vh;
+    }
+    
+    .card-img-top{
+      width: 150px;
+      height: 200px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+    
+    .card {
+      display: flex;
+      align-items: center;
+      background-color: antiquewhite;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+    }
+    
+    .price {
+      color: grey;
+      font-size: 22px;
+    }
+    
+    .card button {
+      border: none;
+      outline: 0;
+      padding: 12px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+    
+    .card button:hover {
+      opacity: 0.7;
+    }
+    </style>

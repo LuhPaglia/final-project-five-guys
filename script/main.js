@@ -37,7 +37,7 @@ mainApp.config(($routeProvider)=>{
         templateUrl:'./template/notfound.html'
     })
 });
-mainApp.run(function($rootScope,$location, $http    ){
+mainApp.run(function($rootScope,$location, $http ){
     $rootScope.userMap = new Map();
     $rootScope.productMap = new Map();
     $rootScope.logged = false;
@@ -55,6 +55,7 @@ mainApp.run(function($rootScope,$location, $http    ){
         $http.get('../data/products.json').then(
             (response)=>{
                 if(response.status==200){
+                    $rootScope.productsData = response.data;
                     response.data.forEach((value)=>{
                         let newProduct = new ProductClass(value.id, value.item_name, value.price, value.amount, value.category, value.img_prod, value.physical, value.digital);
                         $rootScope.productMap.set(value.id,newProduct);
@@ -104,13 +105,166 @@ mainApp.controller('homeControl', function($scope){
 
 });
 mainApp.controller('bookControl', function($scope){
+    $scope.keyName = 'item_name';
+    let button = document.getElementsByClassName("sortButton");
+    $scope.chg = function(nam,price,date,col1,col2,col3,fil){
+        $scope.sortName = nam;
+        $scope.sortPrice = price;
+        $scope.sortDate = date;
+        button[0].style.backgroundColor = col1;
+        button[1].style.backgroundColor = col2;
+        button[2].style.backgroundColor = col3;
+        $scope.filterInput = fil;
+    }
 
+    if($scope.keyName == 'item_name'){
+        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+    };
+    $scope.reverse = false;
+    $scope.sort = function(key){
+        $scope.keyName = key;
+        if($scope.reverse == true){
+            $scope.reverse = false;
+            switch($scope.keyName){
+                case 'item_name':
+                    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                break;
+                case 'price':
+                    $scope.chg('Name', "row", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                break;
+                case 'release':
+                    $scope.chg('Name', "Price", "oldest","#FFFFFF","#FFFFFF","#99CCFF");
+                break;
+            }
+        }else{
+            $scope.reverse = true;
+            switch($scope.keyName){
+                case 'item_name':
+                    $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                break;
+                case 'price':
+                    $scope.chg('Name', "high", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                break;
+                case 'release':
+                    $scope.chg('Name', "Price", "latest","#FFFFFF","#FFFFFF","#99CCFF");
+                break;
+            }   
+        } 
+    };
+
+    $scope.resset = function(item_name){
+        $scope.keyName = item_name;
+        $scope.reverse = false;
+        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+    };
 });
 mainApp.controller('gameControl', function($scope){
+    $scope.keyName = 'item_name';
+    let button = document.getElementsByClassName("sortButton");
+    $scope.chg = function(nam,price,date,col1,col2,col3,fil){
+        $scope.sortName = nam;
+        $scope.sortPrice = price;
+        $scope.sortDate = date;
+        button[0].style.backgroundColor = col1;
+        button[1].style.backgroundColor = col2;
+        button[2].style.backgroundColor = col3;
+        $scope.filterInput = fil;
+    }
 
+    if($scope.keyName == 'item_name'){
+        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+    };
+    $scope.reverse = false;
+    $scope.sort = function(key){
+        $scope.keyName = key;
+        if($scope.reverse == true){
+            $scope.reverse = false;
+            switch($scope.keyName){
+                case 'item_name':
+                    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                break;
+                case 'price':
+                    $scope.chg('Name', "row", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                break;
+                case 'release':
+                    $scope.chg('Name', "Price", "oldest","#FFFFFF","#FFFFFF","#99CCFF");
+                break;
+            }
+        }else{
+            $scope.reverse = true;
+            switch($scope.keyName){
+                case 'item_name':
+                    $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                break;
+                case 'price':
+                    $scope.chg('Name', "high", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                break;
+                case 'release':
+                    $scope.chg('Name', "Price", "latest","#FFFFFF","#FFFFFF","#99CCFF");
+                break;
+            }   
+        } 
+    };
+
+    $scope.resset = function(item_name){
+        $scope.keyName = item_name;
+        $scope.reverse = false;
+        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+    };
 });
 mainApp.controller('movieControl', function($scope){
+    $scope.keyName = 'item_name';
+    let button = document.getElementsByClassName("sortButton");
+    $scope.chg = function(nam,price,date,col1,col2,col3,fil){
+        $scope.sortName = nam;
+        $scope.sortPrice = price;
+        $scope.sortDate = date;
+        button[0].style.backgroundColor = col1;
+        button[1].style.backgroundColor = col2;
+        button[2].style.backgroundColor = col3;
+        $scope.filterInput = fil;
+    }
 
+if($scope.keyName == 'item_name'){
+    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+    };
+    $scope.reverse = false;
+    $scope.sort = function(key){
+        $scope.keyName = key;
+        if($scope.reverse == true){
+            $scope.reverse = false;
+            switch($scope.keyName){
+                case 'item_name':
+                    $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                break;
+                case 'price':
+                    $scope.chg('Name', "row", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                break;
+                case 'release':
+                    $scope.chg('Name', "Price", "oldest","#FFFFFF","#FFFFFF","#99CCFF");
+                break;
+            }
+        }else{
+            $scope.reverse = true;
+            switch($scope.keyName){
+                case 'item_name':
+                    $scope.chg('z - a', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+                break;
+                case 'price':
+                    $scope.chg('Name', "high", "Date","#FFFFFF","#99CCFF","#FFFFFF");
+                break;
+                case 'release':
+                    $scope.chg('Name', "Price", "latest","#FFFFFF","#FFFFFF","#99CCFF");
+                break;
+            }   
+        } 
+    };
+
+    $scope.resset = function(item_name){
+        $scope.keyName = item_name;
+        $scope.reverse = false;
+        $scope.chg('a - z', "Price", "Date","#99CCFF","#FFFFFF","#FFFFFF");
+    };
 });
 mainApp.controller('loginControl', function($scope, $rootScope, $location){
     $scope.email = '';
