@@ -2,6 +2,8 @@ const mainApp = angular.module('mainApp',['ngRoute']);
 import ProductClass from './classes/ProductClass.js';
 import UserClass from './classes/UserClass.js';
 import shopCart from './classes/shopCart.js'
+import WalletClass from './classes/WalletClass.js'
+
 
 mainApp.config(($routeProvider)=>{
     $routeProvider
@@ -40,11 +42,16 @@ mainApp.config(($routeProvider)=>{
 mainApp.run(function($rootScope,$location, $http ){
     $rootScope.userMap = new Map();
     $rootScope.productMap = new Map();
+    $rootScope.walletBook = [];
+    $rootScope.walletGame = [];
+    $rootScope.walletMovie = [];
+
     $rootScope.logged = false;
     $rootScope.userLogged = null;
     $rootScope.logoutUser = function(){
         $rootScope.logged = false;
         $rootScope.userLogged = null;
+        sessionStorage.clear();
         $location.path('/');
     }
     $rootScope.cartArray = [];
@@ -76,6 +83,16 @@ mainApp.run(function($rootScope,$location, $http ){
                         let newUser = new UserClass(value.customerId, value.userName, value.first_name, value.last_name, value.password, value.email);
                         $rootScope.userMap.set(value.customerId,newUser);
                     })
+                    if(sessionStorage.getItem("userLogged") != null){
+                        $rootScope.logged = true;
+                        $rootScope.userLogged = $rootScope.userMap.get(Number(sessionStorage.getItem("userLogged")));
+                        let temp = $rootScope.cartMap
+                        $rootScope.cartMap = new shopCart(value.toObj().customerId);  
+                        for(const item of temp.getAllValues()){
+                            $rootScope.cartMap.addItem(item);
+                        }
+                        $location.path('/');
+                    }
                 }
             },
             (reject)=>{console.log(reject)}
@@ -84,9 +101,9 @@ mainApp.run(function($rootScope,$location, $http ){
         console.log(e);
     };
     $rootScope.popBestProducts = function(){
-        $rootScope.bestBooks = new Array()
-        $rootScope.bestMovies = new Array()
-        $rootScope.bestGames = new Array()
+        $rootScope.bestBooks = new Array();
+        $rootScope.bestMovies = new Array();
+        $rootScope.bestGames = new Array();
 
         $rootScope.productMap.forEach((item, idx)=>{
             let productItem = item.toObj()
@@ -270,8 +287,6 @@ mainApp.controller('loginControl', function($scope, $rootScope, $location){
     $scope.email = '';
     $scope.password = '';
     $scope.getLogin = function(){
-        console.log($scope.email)
-        console.log($scope.password)
         $rootScope.userMap.forEach(function (value){
             if(value.toObj().email == $scope.email && value.toObj().password == $scope.password){
                 $rootScope.logged = true;
@@ -281,6 +296,7 @@ mainApp.controller('loginControl', function($scope, $rootScope, $location){
                 for(const item of temp.getAllValues()){
                     $rootScope.cartMap.addItem(item);
                 }
+                sessionStorage.setItem("userLogged", value.toObj().customerId);
                 $location.path('/');
             }
         });
@@ -290,7 +306,8 @@ mainApp.controller('loginControl', function($scope, $rootScope, $location){
 mainApp.controller('walletControl', function($scope){
 
 });
-mainApp.controller('shopControl', function($rootScope, $scope){
+mainApp.controller('shopControl', function($rootScope, $scope, $location){
+    $scope.digitalProd = new Map();
     $rootScope.buyItem = function(itemId){
         
         let selItem = $rootScope.productMap.get(itemId);
@@ -321,5 +338,39 @@ mainApp.controller('shopControl', function($rootScope, $scope){
 
     $rootScope.calTotal = function(){
         return $rootScope.cartMap.calTotalMap()
+    }
+    $scope.onCgDigital = function(id){
+        if($scope.digitalProd.has(id)){
+            $scope.digitalProd.delete(id);
+        }else{
+            $scope.digitalProd.set(id, $rootScope.productMap.get(Number(id)));
+        }
+    }
+    $scope.checkinShop = function(){
+        $scope.hasDigital = false;
+        $scope.digitalProd.forEach(function (value){
+            switch(value.toObj().category){
+                case "book":
+                    $rootScope.walletBook.push(new WalletClass(value.toObj().id,value.toObj().item_name,"Active"));
+                    $scope.hasDigital = true;
+                    break;
+                case "game":
+                    $rootScope.walletGame.push(new WalletClass(value.toObj().id,value.toObj().item_name,"Active"));
+                    $scope.hasDigital = true;
+                    break;
+                case "movie":
+                    $rootScope.walletMovie.push(new WalletClass(value.toObj().id,value.toObj().item_name,"Active"));
+                    $scope.hasDigital = true;
+                    break;
+            }
+        })
+        alert("Your purchase has been completed");
+        
+        if($scope.hasDigital){
+            $location.path('/digital-wallet');
+        }else{
+            $location.path('/');
+        }
+
     }
 });
