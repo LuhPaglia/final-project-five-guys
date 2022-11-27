@@ -1,5 +1,5 @@
 <div style="border: 1px solid; display: flex; flex-direction: column; justify-content: center; padding: 5%;">
-    <h1>SHOP CART</h1>
+    <h3>YOUR SHOPPING CART</h3>
 
     <div class="col-10 table-responsive">
         <table class="table table-striped
@@ -51,12 +51,36 @@
                             Total: {{calTotal() | currency}}
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-success" ng-click="checkinShop()">Check-In</button>
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalId" ng-click="checkinShop()">Check-In</button>
                         </td>
                     </tr>
                 </tfoot>
         </table>
     </div>
+
+<!-- Modal Body -->
+<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Purchase finished!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Thank you for shopping with us!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="goToHome()">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" ng-click="goToWallet()">Go to digital Wallet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+</script>
+
 </div>
 
 <style>

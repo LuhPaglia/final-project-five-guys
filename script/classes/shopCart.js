@@ -17,6 +17,16 @@ class shopCart{
     delProduct(itemId) {
         this.#shopMap.delete(itemId);
     }
+    getSize() {
+        let cartAmount = 0
+        this.#shopMap.forEach((item)=>{
+            cartAmount += item.amount
+        })
+        return cartAmount
+    }
+    clearMap() {
+        this.#shopMap.clear()
+    }
     calTotalMap(){
         let total = 0;
         for(const product of this.getAllValues()){

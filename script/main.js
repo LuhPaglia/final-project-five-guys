@@ -319,7 +319,10 @@ mainApp.controller('shopControl', function($rootScope, $scope, $location){
             selItem.amount = selItem.amount + 1
         }
         $rootScope.cartMap.addItem(selItem)
-
+        $rootScope.cartSize = $rootScope.cartMap.getSize()
+        if($rootScope.cartSize>0){
+            $rootScope.showCartCounter = true
+        }
         $rootScope.cartArray = [];
         for(let product of $rootScope.cartMap.getAllValues()){
             $rootScope.cartArray.push(product)
@@ -366,13 +369,11 @@ mainApp.controller('shopControl', function($rootScope, $scope, $location){
                     break;
             }
         })
-        alert("Your purchase has been completed");
-        
-        if($scope.hasDigital){
-            $location.path('/digital-wallet');
-        }else{
-            $location.path('/');
-        }
-
+    }
+    $scope.goToHome = function() {
+        $location.path('/');
+    }
+    $scope.goToWallet = function() {
+        $location.path('/digital-wallet');
     }
 });

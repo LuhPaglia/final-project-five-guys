@@ -44,6 +44,9 @@
               <ul class="navbar-nav  mt-2 mt-lg-0">
                 <li ng-show="logged" class="nav-item" id="liCart">
                   <div id="divCart">
+                    <div>
+                      <span ng-show="showCartCounter" class="cartCounter">{{cartSize}}</span>
+                    </div>
                     <a href="#!shop-card" id="navCartIcon" class="fa-solid fa-cart-arrow-down"></a>
                   </div>
                 </li>
@@ -69,10 +72,7 @@
     </header>
     <main ng-view>
 
-    </main>
-    <!-- <footer>
-    </footer> -->
-    
+    </main>>
     <footer class="py-5">
     <hr/>
     <div class="row gap-3">
@@ -198,7 +198,7 @@
 
 
 <style>
-  body { 
+body { 
     font-family: 'Manrope', sans-serif;
     padding-top: 70px; 
     background-color: #F0F4FC;
@@ -211,7 +211,26 @@
 .aColor{
   color: #D21F3C;
 }
-
+#divCart{
+  display: flex;
+  flex-direction: column;
+}
+#divCart div{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.cartCounter{
+  width: 2vh;
+  height: 2vh;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-color: #D21F3C;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+}
 
 h1 {
     color: #32312D;
